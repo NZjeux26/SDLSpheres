@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "C/C++: clang build active file",
+            "command": "/usr/bin/clang",
+            "args": [
+                "-std=c99",
+                "-Wall",
+                "-g",
+                "${fileDirname}/main.c",  // Compile main.c
+                "${fileDirname}/3DFunc.c", // Compile 3DFunc.c
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-I${workspaceFolder}/include",
+                "-lSDL2",
+                "-L${workspaceFolder}/lib"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Build the active file using clang with C99 standard and SDL2."
+        }
+    ]
+}
