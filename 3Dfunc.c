@@ -29,3 +29,22 @@ float map(float value, float fromLow, float fromHigh, float toLow, float toHigh)
 
     return mappedValue;
 }
+
+void projectPoint(Vector3* point3D, float distance){
+    float z = 1.0 / (distance / point3D->z);
+    point3D->x *= z;
+    point3D->y *= z;
+}
+//takes in a 3d vector along with the total points wanted and the desired radius.
+// Vector3 createSphere(Vector3 globe, int total, float r){
+//             for (int i = 0; i < total; i++){
+//             float lat = map(i, 0,total, -M_PI_2, M_PI_2);
+//             for (int j=0; j < total; j++){
+//                 float lon = map(j,0,total, -M_PI, M_PI);
+//                 float x = r * sin(lon) * cos(lat);
+//                 float y = r * sin(lon) * sin(lat);
+//                 float z = r * cos(lon);
+//                 globe[i][j] = createVector3(x,y,z);
+//             }
+//         }
+// }
