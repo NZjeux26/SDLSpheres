@@ -36,15 +36,16 @@ void projectPoint(Vector3* point3D, float distance){
     point3D->y *= z;
 }
 //takes in a 3d vector along with the total points wanted and the desired radius.
-// Vector3 createSphere(Vector3 globe, int total, float r){
-//             for (int i = 0; i < total; i++){
-//             float lat = map(i, 0,total, -M_PI_2, M_PI_2);
-//             for (int j=0; j < total; j++){
-//                 float lon = map(j,0,total, -M_PI, M_PI);
-//                 float x = r * sin(lon) * cos(lat);
-//                 float y = r * sin(lon) * sin(lat);
-//                 float z = r * cos(lon);
-//                 globe[i][j] = createVector3(x,y,z);
-//             }
-//         }
-// }
+Vector3 createSphere(int total, Vector3 globe[total][total], float r){
+            for (int i = 0; i < total; i++){
+            float lat = map(i, 0,total, -M_PI_2, M_PI_2);
+            for (int j=0; j < total; j++){
+                float lon = map(j,0,total, -M_PI, M_PI);
+                float x = r * sin(lon) * cos(lat);
+                float y = r * sin(lon) * sin(lat);
+                float z = r * cos(lon);
+                globe[i][j] = createVector3(x,y,z);
+            }
+        }
+        return globe[total][total];
+}
