@@ -12,18 +12,13 @@ SDL_Renderer* renderer;
 
 int main(int argc, char* argv[]) {
     const int r = 200;
-<<<<<<< HEAD
     const int total = 25;
-=======
-    const int total = 10;
->>>>>>> c2be0ec94fc5dc9699108773b97f5e6f52228b8a
     float angleX = 0;
     float angleY = 0;
     float angleZ = 0.0;
     Vector3 globe[total + 1][total + 1];
     //create SDL window
     createWindow();
-<<<<<<< HEAD
 
     //takes in a 3d vector along with the total points wanted and the desired radius.
     for (int i = 0; i < total + 1; i++){
@@ -36,10 +31,6 @@ int main(int argc, char* argv[]) {
                 globe[i][j] = createVector3(x,y,z);
             }
     }
-=======
-    //create the sphere points vector
-    globe[total][total] = createSphere(total,globe,r);
->>>>>>> c2be0ec94fc5dc9699108773b97f5e6f52228b8a
     //Main loop
     int is_running = 1;
   
@@ -50,11 +41,7 @@ int main(int argc, char* argv[]) {
                 is_running = 0;
             }
         }
-<<<<<<< HEAD
         //3d rotations, see https://en.wikipedia.org/wiki/Rotation_matrix "basic 3d rotations"
-=======
-        //apply rotation angles
->>>>>>> c2be0ec94fc5dc9699108773b97f5e6f52228b8a
         float roX[3][3] = {{1,0,0}, {0,cos(angleX), -sin(angleX)}, {0, sin(angleX), cos(angleX)}};
         float roY[3][3] = {{cos(angleY), 0, sin(angleY)}, {0,1,0}, {-sin(angleY), 0, cos(angleY)}};
         float roZ[3][3] = {{cos(angleZ), -sin(angleZ), 0},{sin(angleZ), cos(angleZ), 0}, {0,0,1}};
@@ -74,7 +61,6 @@ int main(int argc, char* argv[]) {
                 matmul(roX, &rotated);
                 matmul(roZ, &rotated);
 
-<<<<<<< HEAD
                 matmul(roY, &rotated2);
                 matmul(roX, &rotated2);
                 matmul(roZ, &rotated2);
@@ -87,11 +73,6 @@ int main(int argc, char* argv[]) {
                 matmul(roX, &rotated4);
                 matmul(roZ, &rotated4);
 
-=======
-                //loat distance = 100.0;
-                //projectPoint(&rotated, distance);
-                //render the points
->>>>>>> c2be0ec94fc5dc9699108773b97f5e6f52228b8a
                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
                // SDL_RenderDrawPoint(renderer, rotated.x + DISPLAY_WIDTH / 2, rotated.y + DISPLAY_LENGTH / 2);
                 SDL_RenderDrawLine(renderer, rotated.x + DISPLAY_WIDTH / 2, rotated.y + DISPLAY_LENGTH / 2, rotated2.x + DISPLAY_WIDTH / 2, rotated2.y + DISPLAY_LENGTH / 2);
