@@ -12,22 +12,22 @@ SDL_Renderer* renderer;
 
 int main(int argc, char* argv[]) {
     const int r = 200;
-    const int total = 50;
+    const int total = 25;
     float angleX = 0;
     float angleY = 0;
     float angleZ = 0.0;
-    Vector3 globe[total][total];
+    Vector3 globe[total + 1][total + 1];
     //create SDL window
     createWindow();
 
-    
-    for (int i = 0; i < total; i++){
-        float lat = map(i, 0,total, -M_PI_2, M_PI_2);
-            for (int j=0; j < total; j++){
-                float lon = map(j,0,total, -M_PI, M_PI);
-                float x = r * sin(lon) * cos(lat);
-                float y = r * sin(lon) * sin(lat);
-                float z = r * cos(lon);
+    //takes in a 3d vector along with the total points wanted and the desired radius.
+    for (int i = 0; i < total + 1; i++){
+        float lat = map(i, 0,total, 0, M_PI);
+            for (int j=0; j < total + 1; j++){
+                float lon = map(j,0,total, 0, M_PI * 2);
+                float x = r * sin(lat) * cos(lon);
+                float y = r * sin(lat) * sin(lon);
+                float z = r * cos(lat);
                 globe[i][j] = createVector3(x,y,z);
             }
     }
@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
                 is_running = 0;
             }
         }
-
+        //3d rotations, see https://en.wikipedia.org/wiki/Rotation_matrix "basic 3d rotations"
         float roX[3][3] = {{1,0,0}, {0,cos(angleX), -sin(angleX)}, {0, sin(angleX), cos(angleX)}};
         float roY[3][3] = {{cos(angleY), 0, sin(angleY)}, {0,1,0}, {-sin(angleY), 0, cos(angleY)}};
         float roZ[3][3] = {{cos(angleZ), -sin(angleZ), 0},{sin(angleZ), cos(angleZ), 0}, {0,0,1}};
@@ -51,22 +51,39 @@ int main(int argc, char* argv[]) {
         //calculates the lat then the long points for the vector.
 
         for (int i = 0; i < total; i++){
-            for (int j=0; j < total; j++){
+            for (int j=0; j < total + 1; j++){
                 Vector3 rotated = globe[i][j];
+                Vector3 rotated2 = globe[i + 1][j];
+                Vector3 rotated3 = globe[i][j+1];
+                Vector3 rotated4 = globe[i + 1][j + 1];
                 //applies rotations angles to projection of the vector
                 matmul(roY, &rotated);
                 matmul(roX, &rotated);
                 matmul(roZ, &rotated);
 
-                //loat distance = 100.0;
-                //projectPoint(&rotated, distance);
+                matmul(roY, &rotated2);
+                matmul(roX, &rotated2);
+                matmul(roZ, &rotated2);
+
+                matmul(roY, &rotated3);
+                matmul(roX, &rotated3);
+                matmul(roZ, &rotated3);
+
+                matmul(roY, &rotated4);
+                matmul(roX, &rotated4);
+                matmul(roZ, &rotated4);
 
                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-                SDL_RenderDrawPoint(renderer, rotated.x + DISPLAY_WIDTH / 2, rotated.y + DISPLAY_LENGTH / 2);
+               // SDL_RenderDrawPoint(renderer, rotated.x + DISPLAY_WIDTH / 2, rotated.y + DISPLAY_LENGTH / 2);
+                SDL_RenderDrawLine(renderer, rotated.x + DISPLAY_WIDTH / 2, rotated.y + DISPLAY_LENGTH / 2, rotated2.x + DISPLAY_WIDTH / 2, rotated2.y + DISPLAY_LENGTH / 2);
+                SDL_RenderDrawLine(renderer, rotated.x + DISPLAY_WIDTH / 2, rotated.y + DISPLAY_LENGTH / 2, rotated3.x + DISPLAY_WIDTH / 2, rotated3.y + DISPLAY_LENGTH / 2);
+                SDL_RenderDrawLine(renderer, rotated2.x + DISPLAY_WIDTH / 2, rotated2.y + DISPLAY_LENGTH / 2, rotated4.x + DISPLAY_WIDTH / 2, rotated4.y + DISPLAY_LENGTH / 2);
+                SDL_RenderDrawLine(renderer, rotated3.x + DISPLAY_WIDTH / 2, rotated3.y + DISPLAY_LENGTH / 2, rotated4.x + DISPLAY_WIDTH / 2, rotated4.y + DISPLAY_LENGTH / 2);  
+
             }
         }
         angleX += 0.003;
-        angleZ += 0.003;
+        angleZ += 0.004;
         SDL_RenderPresent(renderer);
         SDL_Delay(16); //Cap the frame rate
     }

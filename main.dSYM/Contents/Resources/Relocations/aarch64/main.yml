@@ -1,0 +1,15 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/pbrown/Documents/CodingT/SDLSpheres/main'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x1000032F0, symSize: 0x810 }
+  - { offsetInCU: 0x4D, offset: 0x4D, size: 0x8, addend: 0x0, symName: _window, symBinAddr: 0x100008008, symSize: 0x0 }
+  - { offsetInCU: 0x77, offset: 0x77, size: 0x8, addend: 0x0, symName: _renderer, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offsetInCU: 0x72B, offset: 0x72B, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x1000032F0, symSize: 0x810 }
+  - { offsetInCU: 0x8FB, offset: 0x8FB, size: 0x8, addend: 0x0, symName: _createWindow, symObjAddr: 0x810, symBinAddr: 0x100003B00, symSize: 0x114 }
+  - { offsetInCU: 0x26, offset: 0x1970, size: 0x8, addend: 0x0, symName: _createVector3, symObjAddr: 0x0, symBinAddr: 0x100003C14, symSize: 0x3C }
+  - { offsetInCU: 0x33, offset: 0x197D, size: 0x8, addend: 0x0, symName: _createVector3, symObjAddr: 0x0, symBinAddr: 0x100003C14, symSize: 0x3C }
+  - { offsetInCU: 0x85, offset: 0x19CF, size: 0x8, addend: 0x0, symName: _matmul, symObjAddr: 0x3C, symBinAddr: 0x100003C50, symSize: 0xE0 }
+  - { offsetInCU: 0xE1, offset: 0x1A2B, size: 0x8, addend: 0x0, symName: _map, symObjAddr: 0x11C, symBinAddr: 0x100003D30, symSize: 0xC8 }
+  - { offsetInCU: 0x14F, offset: 0x1A99, size: 0x8, addend: 0x0, symName: _projectPoint, symObjAddr: 0x1E4, symBinAddr: 0x100003DF8, symSize: 0x60 }
+...

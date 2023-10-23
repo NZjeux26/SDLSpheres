@@ -1,6 +1,6 @@
 #include "3Dfunc.h"
 #include <math.h>
-
+//3d vector
 Vector3 createVector3(float x, float y, float z){
     Vector3 vec;
     vec.x = x;
@@ -8,7 +8,7 @@ Vector3 createVector3(float x, float y, float z){
     vec.z = z;
     return vec;
 }
-
+//matrix multiplication 
 void matmul(float matrix[3][3], Vector3 *vector) {
    float x = vector->x;
    float y = vector->y;
